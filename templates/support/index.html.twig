@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}FAKEIT - Support
+{% endblock %}
+
+
+{# NAVBAR #}
+{% block nav %}
+    {{ include('navbar/usernavbar.html.twig') }}
+{% endblock %}
+
+
+{% block body %}
+    <div class="container-fluid pd-t-68">
+        
+        <div class="row no-mlr no-mlr pd-t-68 text-center">
+            <div class="col-2 col-sm-4 col-md-4 col-lg-2 col-xl-2"></div>
+            <div class="col-8 col-sm-4 col-md-4 col-lg-8 col-xl-8">
+                <h1>MIS SOPORTES</h1>
+            </div>
+            <div class="col-2 col-sm-4 col-md-4 col-lg-2 col-xl-2"></div>
+        </div>
+        {% if nsupports != 0 %}
+            {% for s in supports %}
+
+                <div class="row no-mlr no-mlr pd-t-68 text-center">
+                    <div class="col-2 col-sm-4 col-md-4 col-lg-2 col-xl-2"></div>
+                    <div class="col-8 col-sm-4 col-md-4 col-lg-8 col-xl-8">
+                        <h5 class="fakeit">
+                            {% if s.subject == "delete" %}
+                                Borrar Cuenta, {{s.date|date('d-m-Y H:i') }}
+                            {% elseif s.subject == "email" %}
+                                Cambiar Email, {{s.date|date('d-m-Y H:i') }}
+                            {% endif %}
+                        </h5>
+                        <p>{{s.message}}</p>
+                        <p>
+                            <b>
+                                <a href="{{ path('edit_profile', {'id': s.user.id}) }}" id="btn-edit" class="btn btn-primary btn-main mb-3">{{ s.user }}</a>
+                            </b>
+                        </p>
+                    </div>
+                    <div class="col-2 col-sm-4 col-md-4 col-lg-2 col-xl-2"></div>
+                </div>
+            
+            {% endfor %}
+        {% else %}
+            <div class="row no-mlr no-mlr pd-t-68 text-center">
+                <div class="col-2 col-sm-4 col-md-4 col-lg-2 col-xl-2"></div>
+                <div class="col-8 col-sm-4 col-md-4 col-lg-8 col-xl-8">
+                    <div class="alert alert-warning" role="alert">
+                        No hay ningún soporte.
+                    </div>
+                </div>
+                <div class="col-2 col-sm-4 col-md-4 col-lg-2 col-xl-2"></div>
+            </div>
+        {% endif %}
+        
+
+    </div>
+{% endblock %}

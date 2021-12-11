@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}FAKEIT - Support
+{% endblock %}
+
+
+{# NAVBAR #}
+{% block nav %}
+    {{ include('navbar/usernavbar.html.twig') }}
+{% endblock %}
+
+
+{% block body %}
+    <div class="container-fluid pd-t-68">
+        
+        <form name="support_form" method="post" action="/support/{{userId}}">
+             <div class="row no-mlr no-mlr pd-t-68 text-center">
+				<div class="col-2 col-sm-4 col-md-4 col-lg-2 col-xl-2"></div>
+				<div class="col-8 col-sm-4 col-md-4 col-lg-8 col-xl-8">
+					<h1>NUEVO SOPORTE</h1>
+				</div>
+				<div class="col-2 col-sm-4 col-md-4 col-lg-2 col-xl-2"></div>
+			</div>
+
+			<div class="row no-mlr mt-5">
+				<div class="col-2 col-sm-2 col-md-4 col-lg-4"></div>
+				<div class="col-8 col-sm-8 col-md-4 col-lg-4">
+					<label for="subject" class="required">Asunto:</label>
+					<select id="subject" name="support_subject" label="subject" class="form-control txt">
+						<option value="email">Cambiar Email</option>
+						<option value="delete">Borrar cuenta</option>
+					</select>
+				</div>
+				<div class="col-2 col-sm-2 col-md-4 col-lg-4"></div>
+			</div>
+
+			<div class="row no-mlr mt-5">
+				<div class="col-2 col-sm-2 col-md-4 col-lg-4"></div>
+				<div class="col-8 col-sm-8 col-md-4 col-lg-4 form-group">
+					<label for="message" class="required">Mensaje:</label><br/>
+					<textarea id="message" name="support_message" class="form-control" rows="8" cols="72" required></textarea>
+				</div>
+				<div class="col-2 col-sm-2 col-md-4 col-lg-4"></div>
+			</div>
+
+			<div class="row no-mlr mt-4 text-center">
+				<div class="col-2 col-sm-4 col-md-4 col-lg-4 col-xl-5"></div>
+				<div class="col-8 col-sm-4 col-md-4 col-lg-4 col-xl-2">
+					<div>
+						<input type="submit"  class="btn btn-primary" value="ENVIAR">
+					</div>
+				</div>
+				<div class="col-2 col-sm-4 col-md-4 col-lg-4 col-xl-5"></div>
+			</div>
+    </div>
+{% endblock %}

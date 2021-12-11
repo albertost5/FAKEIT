@@ -1,0 +1,167 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	Editing
+	{{ user | capitalize }}'s Profile - FAKEIT
+{% endblock %}
+
+{# NAVBAR #}
+{% block nav %}
+	{{ include('navbar/usernavbar.html.twig') }}
+{% endblock %}
+
+
+{% block body %}
+	<div class="container-fluid pd-t-68">
+	
+		<form name="edit_form" method="post" action="/save/{{userId}}">
+			
+            <div class="row no-mlr no-mlr pd-t-68 text-center">
+				<div class="col-2 col-sm-4 col-md-4 col-lg-4 col-xl-5"></div>
+				<div class="col-8 col-sm-4 col-md-4 col-lg-4 col-xl-2">
+					<h1>EDITAR PERFIL </h1>
+				</div>
+				<div class="col-2 col-sm-4 col-md-4 col-lg-4 col-xl-5"></div>
+			</div>
+			{% if "ROLE_ADMIN" in currentUser.roles %}
+				<div class="row no-mlr">
+					<div class="col-2 col-sm-4 col-md-4 col-lg-4 col-xl-5"></div>
+					<div class="col-8 col-sm-4 col-md-4 col-lg-4 col-xl-2">
+						<label for="fname" class="required">Email:</label>
+						<input type="text" id="email" name="email" label="email" class="form-control txt" value="{{user.email}}" placeholder="Introduce nuevo email..." pattern="^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$">
+					</div>
+					<div class="col-2 col-sm-4 col-md-4 col-lg-4 col-xl-5"></div>
+				</div>
+			{% endif %}
+
+			<div class="row no-mlr">
+				<div class="col-2 col-sm-4 col-md-4 col-lg-4 col-xl-5"></div>
+				<div class="col-8 col-sm-4 col-md-4 col-lg-4 col-xl-2">
+					<label for="fname" class="required">Nombre:</label>
+					<input type="text" id="fname" name="fname" label="fname" class="form-control txt" value="{{user.name}}" placeholder="Introduce tu nuevo nombre...">
+				</div>
+				<div class="col-2 col-sm-4 col-md-4 col-lg-4 col-xl-5"></div>
+			</div>
+
+			<div class="row no-mlr">
+				<div class="col-2 col-sm-4 col-md-4 col-lg-4 col-xl-5"></div>
+				<div class="col-8 col-sm-4 col-md-4 col-lg-4 col-xl-2">
+					<label for="surname" class="required">Apellidos:</label>
+					<input type="text" id="surname" name="surname" label="surname" class="form-control txt" value="{{user.surname}}" placeholder="Introduce tu nuevo apellido...">
+				</div>
+				<div class="col-2 col-sm-4 col-md-4 col-lg-4 col-xl-5"></div>
+			</div>
+
+			<div class="row no-mlr">
+				<div class="col-2 col-sm-4 col-md-4 col-lg-4 col-xl-5"></div>
+				<div class="col-8 col-sm-4 col-md-4 col-lg-4 col-xl-2">
+					<label for="country" class="required">País:</label>
+					<select id="country" name="country" label="country" class="form-control txt">
+						<option value="de" {% if user.country == "de" %}selected{% endif %}>Alemania</option>
+						<option value="be" {% if user.country == "be" %}selected{% endif %}>Bélgica</option>
+						<option value="dk" {% if user.country == "dk" %}selected{% endif %}>Dinamarca</option>
+						<option value="es" {% if user.country == "es" %}selected{% endif %}>España</option>
+						<option value="fi" {% if user.country == "fi" %}selected{% endif %}>Finlandia</option>
+						<option value="fr" {% if user.country == "fr" %}selected{% endif %}>Francia</option>
+						<option value="nl" {% if user.country == "nl" %}selected{% endif %}>Holanda</option>
+						<option value="it" {% if user.country == "it" %}selected{% endif %}>Italia</option>
+						<option value="pl" {% if user.country == "pl" %}selected{% endif %}>Polonia</option>
+						<option value="pt" {% if user.country == "pt" %}selected{% endif %}>Portugal</option>
+						<option value="ch" {% if user.country == "ch" %}selected{% endif %}>Suiza</option>
+						<option value="se" {% if user.country == "se" %}selected{% endif %}>Suecia</option>
+						<option value="uk" {% if user.country == "uk" %}selected{% endif %}>Reino Unido</option>
+					</select>
+				</div>
+				<div class="col-2 col-sm-4 col-md-4 col-lg-4 col-xl-5"></div>
+			</div>
+
+			<div class="row no-mlr">
+				<div class="col-2 col-sm-4 col-md-4 col-lg-4 col-xl-5"></div>
+				<div class="col-8 col-sm-4 col-md-4 col-lg-4 col-xl-2">
+
+					<label for="city" class="required">Ciudad:</label>
+					<input type="text" id="city_input" name="city" label="city" class="form-control txt" value="{{user.city}}" placeholder="Introduce tu nueva ciudad...">
+				</div>
+				<div class="col-2 col-sm-4 col-md-4 col-lg-4 col-xl-5"></div>
+			</div>
+
+			{# <div class="row no-mlr">
+				<div class="col-2 col-sm-4 col-md-4 col-lg-4 col-xl-5"></div>
+				<div class="col-8 col-sm-4 col-md-4 col-lg-4 col-xl-2">
+					<label for="imgUser" class="required">Imagen de perfil</label>
+					<input type="file" id="imgUser" name="imgUser" required="required" label="imgUser">
+				</div>
+				<div class="col-2 col-sm-4 col-md-4 col-lg-4 col-xl-5"></div>
+			</div> #}
+
+			<div class="row no-mlr">
+				<div class="col-2 col-sm-4 col-md-4 col-lg-4 col-xl-5"></div>
+				<div class="col-8 col-sm-4 col-md-4 col-lg-4 col-xl-2">
+
+					<label for="twitter" class="required">Twitter:</label>
+					<input type="text" id="twitter" name="twitter" label="twitter" class="form-control txt" value="{{user.twitter}}" placeholder="Introduce nuevo nombre de twitter...">
+				</div>
+				<div class="col-2 col-sm-4 col-md-4 col-lg-4 col-xl-5"></div>
+			</div>
+
+			<div class="row no-mlr">
+				<div class="col-2 col-sm-4 col-md-4 col-lg-4 col-xl-5"></div>
+				<div class="col-8 col-sm-4 col-md-4 col-lg-4 col-xl-2">
+
+					<label for="facebook" class="required">Facebook:</label>
+					<input type="text" id="facebook" name="facebook" label="facebook" class="form-control txt" value="{{user.facebook}}" placeholder="Introduce nuevo nombre de facebook...">
+				</div>
+				<div class="col-2 col-sm-4 col-md-4 col-lg-4 col-xl-5"></div>
+			</div>
+
+			<div class="row no-mlr">
+				<div class="col-2 col-sm-4 col-md-4 col-lg-4 col-xl-5"></div>
+				<div class="col-8 col-sm-4 col-md-4 col-lg-4 col-xl-2">
+
+					<label for="twitch" class="required">Twitch:</label>
+					<input type="text" id="twitch" name="twitch" label="twitch" class="form-control txt" value="{{user.twitch}}" placeholder="Introduce nuevo nombre de twitch...">
+				</div>
+				<div class="col-2 col-sm-4 col-md-4 col-lg-4 col-xl-5"></div>
+			</div>
+			{% if "ROLE_ADMIN" in currentUser.roles %}
+				<div class="row no-mlr">
+					<div class="col-2 col-sm-4 col-md-4 col-lg-4 col-xl-5"></div>
+					<div class="col-8 col-sm-4 col-md-4 col-lg-4 col-xl-2">
+
+						<label for="activated" class="required">Activar/Desactivar cuenta:</label>
+						<select id="activated" name="activated" label="activated" class="form-control txt">
+							<option value="1" {% if user.activated == 1 %}selected{% endif %}>Activada</option>
+							<option value="0" {% if user.activated == 0 %}selected{% endif %}>Desactivada</option>
+						</select>
+					</div>
+					<div class="col-2 col-sm-4 col-md-4 col-lg-4 col-xl-5"></div>
+				</div>
+			{% endif %}
+
+			<div class="row no-mlr mt-4 text-center">
+				<div class="col-2 col-sm-4 col-md-4 col-lg-4 col-xl-5"></div>
+				<div class="col-8 col-sm-4 col-md-4 col-lg-4 col-xl-2">
+					<div>
+						<input type="submit"  class="btn btn-primary" value="GUARDAR">
+					</div>
+				</div>
+				<div class="col-2 col-sm-4 col-md-4 col-lg-4 col-xl-5"></div>
+			</div>
+
+			<div class="row no-mlr mt-4 text-center">
+				<div class="col-2 col-sm-4 col-md-4 col-lg-4 col-xl-5"></div>
+				<div class="col-8 col-sm-4 col-md-4 col-lg-4 col-xl-2">
+					<div>
+						{% if "ROLE_ADMIN" in currentUser.roles %}
+							<a href="{{ path('index_support') }}" class="btn btn-primary">VOLVER</a>
+						{% else %}
+							<a href="{{ path('profile', {'id': userId}) }}" class="btn btn-primary">VOLVER</a>
+						{% endif %}	
+					</div>
+				</div>
+				<div class="col-2 col-sm-4 col-md-4 col-lg-4 col-xl-5"></div>
+			</div>
+
+		</form>
+	</div>
+{% endblock %}

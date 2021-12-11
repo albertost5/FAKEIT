@@ -1,0 +1,17 @@
+{
+  "name": "fakeit",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "node-sass": "^4.13.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "sass": "sass bootstrap/scss/fakeit.scss:public/css/index.css --watch",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "php -S localhost:8000 -t public"
+  },
+  "author": "",
+  "license": "ISC"
+}

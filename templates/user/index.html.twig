@@ -1,0 +1,275 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ user | capitalize }}'s Profile - FAKEIT{% endblock %}
+
+{# NAVBAR #}
+{% block nav %}
+	{{ include('navbar/usernavbar.html.twig') }}
+{% endblock %}
+
+
+{% block body %}
+    <div class="container-fluid" id="userbg" style="padding-top: 310px;" >
+        <div class="row" style="margin-top: -180px;">
+            <div class="col-12">
+                <div class="d-inline-block ml-50" style="boder: 2px solid yellow;">
+                    <img src="/img/imgUser/{{user.imgUser}}" class="round-img" alt="change" width="150" height="150">
+                </div>
+                <div class="d-inline-block ml-15">
+                    <h1><b>{{user}}</b><img src="/img/flags/{{user.country}}.svg" width="60" height="20" alt="country_{{user.country}}"></h1>
+                    <p>Miembro desde {{user.date}}</p>
+                </div>
+                <div class="d-inline-block mr-5" style="float:right">
+                    {% if user.id == currentuser.id or "ROLE_ADMIN" in currentuser.roles %}
+                        {% if user.activated == 1 %}
+                            <a href="{{ path('edit_profile', {'id': user.id}) }}" id="btn-edit" class="btn btn-primary btn-main mb-3">EDITAR PERFIL</a>
+                        {% endif %}
+                        {% if "ROLE_ADMIN" in currentuser.roles %}
+                            <span class="ml-1 btn-logout" style="background-color: red;">ADMIN</span>
+                        {% endif %}
+                    {# {% elseif "ROLE_ADMIN" in currentuser.roles %}
+                        <a href="{{ path('edit_profile', {'id': user.id}) }}" id="btn-edit" class="btn btn-primary btn-main mb-3">EDITAR PERFIL</a>
+                        <p>ADMIN</p>
+                        <p> {{currentuser.id}} </p>
+                        <p> {{user.id}} </p> #}
+                    {% endif %}
+                </div>
+                
+                <h1>{{roles}}</h1>
+            </div>
+        </div>
+    </div>
+
+    <hr class="w-999">
+    {% if user.activated == 1 %}
+        {# INFO TITLE #}
+        <div class="row no-mlr mt-50">
+                <div class="col-1"></div>
+                <div class="col-10 text-left">
+                    <h4><b>INFO</b></h4>
+                </div>
+                <div class="col-1"></div>
+            </div>
+        </div>
+
+        {# INFO DATA #}
+        <div class="row no-mlr" id="info">
+            <div class="col-1"></div>
+            <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 bg-fkgray2 text-center" id="name">
+                <p class="mt-3">{{user.name}} {{user.surname}}</p>
+            </div>
+            <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 bg-fkgray2 text-center" id="age">
+                <p class="mt-3">{{age}} años</p>
+            </div>
+            <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 bg-fkgray2 text-center" id="city">
+                <p class="mt-3">{{user.city | capitalize}}</p> {# Introducir en bd antes del registro los nombres de las ciudad en mayúscula la primera letra, resto minus #}
+            </div>
+            <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 bg-fkgray2 text-center" id="fpoints">
+                <p class="mt-3"><b class="fakeit">F</b> {{user.fakeitpoints}}</p>
+            </div>
+            <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 bg-fkgray2 text-center pd-t-10" id="rrss">
+                <a href="https://twitter.com/{{user.twitter}}" id="twitter" class="text-decoration-none">
+                    <i class="fab fa-twitter fa-2x"></i>
+                </a>
+                <a href="https://www.facebook.com/{{user.facebook}}/" id="facebook" class="text-decoration-none">
+                    <i class="fab fa-facebook-square fa-2x"></i>
+                </a>
+                <a href="https://www.twitch.tv/{{user.twitch}}" id="twitch" class="text-decoration-none">
+                    <i class="fab fa-twitch fa-2x"></i>
+                </a>
+            </div>
+            <div class="col-1"></div>
+        </div>
+
+        {# STATS TITLE #}
+        <div class="row no-mlr mt-50">
+                <div class="col-1"></div>
+                <div class="col-10 text-left">
+                    <h4><b>STATS</b></h4>
+                </div>
+                <div class="col-1"></div>
+            </div>
+        </div>
+
+        {# STATS DATA #}
+        <div class="row no-mlr text-center">
+            <div class="col-1"></div>
+            <div class="bg-fkgray2 col-10">
+                <div class="row no-mlr text-center">             
+                    <div class="col-3">
+                    <p class="mt-3">MATCHES<br/>{{total}}</p>
+                    </div>
+                    <div class="col-3">
+                        <p class="mt-3">KILLS<br/>{{totalKills}}</p>
+                    </div>
+                    <div class="col-2">
+                        <p class="mt-3">WIN RATE<br/>{{winrate}}%</p>
+                    </div>
+                    <div class="col-2">
+                        <p class="mt-3">K/D RATIO<br/>{{kd}}</p>
+                    </div>
+                
+                    <div class="col-2">
+                        <p class="mt-3">AVG KILLS<br/>{{avg}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-1"></div>
+        </div>
+
+        {# LEVEL/ELO #}
+        <div class="row no-mlr mt-50">
+                <div class="col-1"></div>
+                <div class="col-10 text-left">
+                    <h4 class="d-inline"><b>LEVEL</b></h4>
+                    <p class="d-inline float-right">{{user.elo}}</p>
+                </div>
+                <div class="col-1"></div>
+            </div>
+        </div>
+        <div class="row no-mlr">
+            <div class="col-1"></div>
+            <div class="col-10">
+                <div class="progress" style="height: 10px; width: 100%; margin-top: 0px;">
+                    <div class="progress-bar" role="progressbar" style="width: {{ percentbar }}%" ></div>
+                </div>
+            </div>
+            <div class="col-1"></div>
+        </div>
+        <div class="row no-mlr text-center">
+            <div class="col-1"></div>
+            <div class="col-1">
+                <img src="/img/levels/level1.svg" width="30" height="50" alt="level1">
+            </div>
+            <div class="col-1">
+                <img src="/img/levels/level2.svg" width="30" height="50" alt="level2">
+            </div>
+            <div class="col-1">
+                <img src="/img/levels/level3.svg" width="30" height="50" alt="level3">
+            </div>
+            <div class="col-1">
+                <img src="/img/levels/level4.svg" width="30" height="50" alt="level4">
+            </div>
+            <div class="col-1">
+                <img src="/img/levels/level5.svg" width="30" height="50" alt="level5">
+            </div>
+            <div class="col-1">
+                <img src="/img/levels/level6.svg" width="30" height="50" alt="level6">
+            </div>
+            <div class="col-1">
+                <img src="/img/levels/level7.svg" width="30" height="50" alt="level7">
+            </div>
+            <div class="col-1">
+                <img src="/img/levels/level8.svg" width="30" height="50" alt="level8">
+            </div>
+            <div class="col-1">
+                <img src="/img/levels/level9.svg" width="30" height="50" alt="level9">
+            </div>
+            <div class="col-1">
+                <img src="/img/levels/level10.svg" width="30" height="50" alt="level10">
+            </div>
+            <div class="col-1"></div>
+        </div>
+
+        {% set map1 = 'de_mirage' %}
+        {% set map2 = 'de_dust2' %}
+        {% set map3 = 'de_vertigo' %}
+        {% set map4 = 'de_overpass' %}
+        {# Contadores de los mapas #}
+        {% set c1 = 0 %}
+        {% set c2 = 0 %}
+        {% set c3 = 0 %}
+        {% set c4 = 0 %}
+        {# Contar las veces que se repiten los mapas jugados #}
+        {% for p in plays %}
+            {% if p.map == map1 %}
+                {% set c1 = c1 + 1 %}
+            {% elseif p.map == map2 %}
+                {% set c2 = c2 + 1 %}
+            {% elseif p.map == map3 %}
+                {% set c3 = c3 + 1 %}
+            {% elseif p.map == map4 %}
+                {% set c4 = c4 + 1 %}
+            {% endif %}
+        {% endfor %}
+        {# Establecer un total para hacer los % que se ha jugado cada mapa #}
+        {% set total = c1 + c2 + c3 + c4 %}
+        {# Calculo de porcentajes #}
+        {% set pmirage = 0 %}
+        {% set pdust2 = 0 %}
+        {% set pvertigo = 0 %}
+        {% set poverpass = 0 %}
+        {% if total > 0 %}
+            {% set pmirage = (c1 / total * 100) | round %}
+            {% set pdust2 = (c2 / total * 100) | round %}
+            {% set pvertigo = (c3 / total * 100) | round %}
+            {% set poverpass = (c4 / total * 100) | round %}
+        {% endif %}
+
+        {# MAPS #}
+        <div class="row no-mlr mt-50">
+                <div class="col-1"></div>
+                <div class="col-10 text-left">
+                    <h4><b>MAPS</b></h4>
+                </div>
+                <div class="col-1"></div>
+            </div>
+        </div>
+
+        <div class="row no-mlr">
+            
+            <div class="col-xl-3 col-lg-5 col-md-6 col-sm-12 mt-3">
+                <div class="card fakeit text-center bg-fkgray2 mx-auto" style="width: 16rem;">
+                    <img src="/img/maps/de_mirage.jpg" class="round-img mx-auto mt-5" alt="de_mirage" width="130" height="130">
+                    <div class="card-body">
+                        <h5 class="card-title text-white">{{map1}}</h5>
+                        <p class="card-text">{{pmirage}}%</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-lg-5 col-md-6 col-sm-12 mt-3">
+                <div class="card fakeit text-center bg-fkgray2 mx-auto" style="width: 16rem;">
+                    <img src="/img/maps/de_dust2.jpg" class="round-img mx-auto mt-5" alt="de_dust2" width="130" height="130">
+                    <div class="card-body">
+                        <h5 class="card-title text-white">{{map2}}</h5>
+                        <p class="card-text">{{pdust2}}%</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-lg-5 col-md-6 col-sm-12 mt-3">
+                <div class="card fakeit text-center bg-fkgray2 mx-auto" style="width: 16rem;">
+                    <img src="/img/maps/de_vertigo.jpg" class="round-img mx-auto mt-5" alt="de_vertigo" width="130" height="130">
+                    <div class="card-body">
+                        <h5 class="card-title text-white">{{map3}}</h5>
+                        <p class="card-text">{{pvertigo}}%</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-lg-5 col-md-6 col-sm-12 mt-3">
+                <div class="card fakeit text-center bg-fkgray2 mx-auto" style="width: 16rem;">
+                    <img src="/img/maps/de_overpass.jpg" class="round-img mx-auto mt-5" alt="de_overpass" width="130" height="130">
+                    <div class="card-body">
+                        <h5 class="card-title text-white">{{map4}}</h5>
+                        <p class="card-text">{{poverpass}}%</p>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+
+        <div class="row no-mlr">
+            <br/>
+        </div>
+    {% else %}
+        <div class="row no-mlr pd-tb-40 mt-5">
+            <div class="col-1 col-sm-2 col-md-2 col-lg-2 col-xl-3"></div>
+            <div class="col-10 col-sm-10 col-md-8 col-lg-8 col-xl-6 text-center">
+                <div class="alert alert-warning" role="alert">
+                    CONTACTE CON EL ADMINISTRADOR PARA REACTIVAR LA CUENTA
+                </div>
+            <div class="col-1 col-sm-2 col-md-2 col-lg-2 col-xl-3"></div>
+        </div>
+    {% endif %}
+
+{% endblock %}
+

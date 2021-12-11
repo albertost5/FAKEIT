@@ -1,0 +1,259 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Registro - FAKEIT
+{% endblock %}
+
+{# NAVBAR #}
+{% block nav %}
+	{{ include('navbar/regnavbar.html.twig') }}
+{% endblock %}
+
+{% block body %}
+
+	<div class="container-fluid">
+		<h1 class="text-center mt-5 mb-5">CREAR CUENTA</h1>
+		{{ form_start(registrationForm) }}
+		<div class="row">
+			<div class="col-2 col-sm-4 col-md-4 col-lg-4 col-xl-5"></div>
+			<div class="col-8 col-sm-4 col-md-4 col-lg-4 col-xl-2">
+				{{ form_row(registrationForm.email, {'attr': {'pattern': '[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,63}$'}, 'label' : 'Email' })}}
+			</div>
+			<div class="col-2 col-sm-4 col-md-4 col-lg-4 col-xl-5"></div>
+		</div>
+		<div class="row">
+			<div class="col-2 col-sm-4 col-md-4 col-lg-4 col-xl-5"></div>
+			<div class="col-8 col-sm-4 col-md-4 col-lg-4 col-xl-2">
+				{{ form_row(registrationForm.plainPassword, {'label' : 'Contraseña' }) }}
+			</div>
+			<div class="col-2 col-sm-4 col-md-4 col-lg-4 col-xl-5"></div>
+		</div>
+		
+		<div class="row">
+			<div class="col-2 col-sm-4 col-md-4 col-lg-4 col-xl-5"></div>
+			<div class="col-8 col-sm-4 col-md-4 col-lg-4 col-xl-2">
+				{{ form_row(registrationForm.nick, {'label' : 'Nickname' }) }}
+			</div>
+			<div class="col-2 col-sm-4 col-md-4 col-lg-4 col-xl-5"></div>
+		</div>
+		
+		<div class="row">
+			<div class="col-2 col-sm-4 col-md-4 col-lg-4 col-xl-5"></div>
+			<div class="col-8 col-sm-4 col-md-4 col-lg-4 col-xl-2">
+				{{ form_row(registrationForm.name, {'label' : 'Nombre' }) }}
+			</div>
+			<div class="col-2 col-sm-4 col-md-4 col-lg-4 col-xl-5"></div>
+		</div>
+		
+		<div class="row">
+			<div class="col-2 col-sm-4 col-md-4 col-lg-4 col-xl-5"></div>
+			<div class="col-8 col-sm-4 col-md-4 col-lg-4 col-xl-2">
+				{{ form_row(registrationForm.surname, {'label' : 'Apellidos' }) }}
+			</div>
+			<div class="col-2 col-sm-4 col-md-4 col-lg-4 col-xl-5"></div>
+		</div>
+		
+		<div class="row">
+			<div class="col-2 col-sm-4 col-md-4 col-lg-4 col-xl-5"></div>
+			<div class="col-8 col-sm-4 col-md-4 col-lg-4 col-xl-2">
+				{{ form_row(registrationForm.country, {'label' : 'País' }) }}
+			</div> 
+			<div class="col-2 col-sm-4 col-md-4 col-lg-4 col-xl-5"></div>
+		</div>
+		
+		<div class="row">
+			<div class="col-2 col-sm-4 col-md-4 col-lg-4 col-xl-5"></div>
+			<div class="col-8 col-sm-4 col-md-4 col-lg-4 col-xl-2">
+				{{ form_row(registrationForm.city, {'label' : 'Ciudad' }) }}
+			</div>
+			<div class="col-2 col-sm-4 col-md-4 col-lg-4 col-xl-5"></div>
+		</div>
+
+		<div class="row">
+			<div class="col-2 col-sm-4 col-md-4 col-lg-4 col-xl-5"></div>
+			<div class="col-8 col-sm-4 col-md-4 col-lg-4 col-xl-2">
+				{{ form_row(registrationForm.birth, {'label' : 'F. Nacimiento' }) }}
+			</div>
+			<div class="col-2 col-sm-4 col-md-4 col-lg-4 col-xl-5"></div>
+		</div>
+		
+		<div class="row">
+			<div class="col-2 col-sm-4 col-md-4 col-lg-4 col-xl-5"></div>
+			<div class="col-8 col-sm-4 col-md-4 col-lg-4 col-xl-2">
+				{{ form_row(registrationForm.imgUser, {'label' : 'Imagen de perfil' }) }}
+			</div>
+			<div class="col-2 col-sm-4 col-md-4 col-lg-4 col-xl-5"></div>
+		</div>
+		
+		{# {{ form_row(registrationForm.agreeTerms, {'label' : 'Aceptar Condiciones' }) }} #}
+		{# Link trigger modal #}
+		<div class="row">
+			<div class="col-2 col-sm-4 col-md-4 col-lg-4 col-xl-5"></div>
+			<div class="col-8 col-sm-4 col-md-4 col-lg-4 col-xl-2">
+				<a href="#" data-toggle="modal" data-target="#termsModal"> Aceptar Política de privacidad</a>
+				<input type="checkbox" id="agreeTerms" name="agreeTerms" required="required" value="1">
+			</div>
+			<div class="col-2 col-sm-4 col-md-4 col-lg-4 col-xl-5"></div>
+		</div>
+		{# Modal #}
+		<div class="modal fade mt-1" style="color: black;" id="termsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
+				<div class="modal-content">
+					<div class="modal-header modal-headerbg">
+						<h4 class="modal-title mb-1 modal-center-hreg text-center" id="exampleModalLabel">NUESTRA POLÍTICA DE PRIVACIDAD</h4>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body modal-bodybg">
+						<h4 class="fakeit">1. INTRODUCCIÓN Y TÉRMINOS GENERALES</h4>
+						<p>Esta política de privacidad y datos (" Política de privacidad ") se aplica y tiene efecto con respecto a todos nuestros clientes de software para juegos competitivos, servicios en línea relacionados (incluida la conectividad e interactividad de juego en red en línea) y otros software y productos puestos a disposición por nosotros (juntos los " Clientes "), así como cualquier otra función en línea relacionada con nuestro negocio, incluido nuestro sitio web.</p>
+						<p><i>Si tiene alguna pregunta o comentario sobre esta Política de privacidad, contáctenos a través del soporte.</i></p>
+						<p>
+							Estamos comprometidos a proteger y respetar su privacidad. La Política de privacidad explica la base sobre la cual la información personal que recopilamos de usted será procesada por nosotros o en nuestro nombre. Cuando decidimos el propósito o los medios para los cuales se procesan los datos personales que usted proporciona a través de estos Servicios en línea, somos el "controlador de datos". Cumpliremos con todas las leyes de protección de datos aplicables, incluido el Reglamento general de protección de datos 2016/679.
+								Lea atentamente esta Política de privacidad, ya que contiene información importante sobre lo siguiente:
+							•	Qué información podemos recopilar sobre usted;
+							•	Cómo usaremos la información que recopilamos sobre usted;
+							•	Si revelaremos sus datos a alguien más; y
+							•	Sus opciones y derechos con respecto a la información personal que nos ha proporcionado.
+							Esta política de privacidad debe leerse junto con nuestros términos de uso del sitio web y cualquier término aplicado a cualquiera de los clientes.
+							Los Servicios en línea pueden contener hipervínculos a servicios que son propiedad y están operados por terceros, para permitir que los Servicios en línea se conecten a esos servicios por otros medios. Los servicios de terceros pueden tener sus propias políticas de privacidad y le recomendamos que los revise. Pueden regir el uso de la información personal que usted envíe o que se recopile mediante cookies y otras tecnologías de seguimiento al usar estos servicios. No aceptamos ninguna responsabilidad u obligación por las prácticas de privacidad de dichos servicios de terceros y su uso de estos servicios es bajo su propio riesgo.
+							Podemos hacer cambios a esta Política de privacidad en el futuro, que se le notificará.
+						</p>
+
+						<h4 class="fakeit">2. INFORMACIÓN QUE PODEMOS RECOPILAR SOBRE USTED</h4>
+						<p>Recopilamos y procesamos la siguiente información que puede incluir sus datos personales.</p>
+						<h6><u>INFORMACIÓN PROPORCIONADA CUANDO SE REGISTRA EN NUESTROS SERVICIOS EN LÍNEA ("INFORMACIÓN DE REGISTRO")</u></h6>
+						<p>
+							Para acceder a secciones restringidas del sitio web e instalar un Cliente, debe proporcionar la siguiente información:</br>
+							•	Nombre de usuario;</br>
+							•	Email;</br>
+							•	Contraseña;</br>
+							•	País;</br>
+							•	Fecha de nacimiento;</br>
+							•	Nombre de pila; y</br>
+							•	Apellido.</br>
+							•	Imagen de avatar;
+						</p>
+						<h6><u>INFORMACIÓN OPCIONAL PROPORCIONADA POR USTED CUANDO UTILIZA LOS SERVICIOS EN LÍNEA ("INFORMACIÓN OPCIONAL")</u></h6>
+						<p>
+						Si lo desea, después del registro, puede agregar la siguiente información a su perfil de FAKEIT, utilizando la configuración de su cuenta de FAKEIT:</br>
+							•	Número de teléfono;</br>
+							•	Imagen de fondo;</br>
+							•	Cuenta de Twitch;</br>
+							•	Cuenta de Twitter;</br>
+							•	Cuenta de YouTube;
+						</p>
+						<h6><u>INFORMACIÓN PROPORCIONADA POR USTED CUANDO UTILIZA LOS SERVICIOS EN LÍNEA ("INFORMACIÓN BÁSICA")</u></h6>
+						<p>
+							Recopilaremos la siguiente información cuando juegues a uno de nuestros Clientes:</br>
+							•	Estadísticas del partido;</br>
+							•	Resultados del partido;
+						</p>
+						<h6><u>INFORMACIÓN DE CONTACTO PROPORCIONADA POR USTED CUANDO SE CONTACTA CON NOSOTROS O UTILIZA EL CENTRO DE SOPORTE ("INFORMACIÓN DE CONTACTO")</u></h6>
+						<p>
+							Podemos solicitarle o enviarnos cierta información de contacto cada vez que se registre en nuestra Lista de correo.
+							Esto puede incluir:</br>
+							•	Tu correo electrónico; y</br>
+							•	tu nombre.
+						</p>
+						<h6><u>CONTENIDO DE CHAT CREADO POR NUESTROS USUARIOS ("CONTENIDO DE USUARIO")</u></h6>
+						<p>
+							Cuando los usuarios envían su propio Contenido de usuario a cualquiera de nuestras funciones de chat, este contenido puede contener información personal y no personal. Esto podría incluir información en o sobre el Contenido del usuario, como la ubicación de una foto o la fecha en que se creó un archivo, o cualquier otra cosa que un usuario decida comunicarse utilizando estas partes de nuestros Servicios en línea.
+						</p>
+						<h4 class="fakeit">3. POR QUÉ RECOPILAMOS INFORMACIÓN SOBRE USTED</h4>
+						<h6><u>PARA PROPORCIONARLE LOS SERVICIOS EN LÍNEA</u></h6>
+						<p>
+							Utilizaremos información sobre usted (incluida información básica, información de registro, información opcional, análisis y contenido del usuario) para brindarle nuestros servicios en línea bajo los términos de uso acordados entre nosotros. El procesamiento de la información de esta manera es necesario para que registremos el resultado de las competiciones en las que participa, su clasificación y rendimiento, y para garantizar que los Clientes brinden las características prometidas y funcionen correctamente, para que tenga la mejor experiencia al jugar con cualquiera de nuestros clientes o de otro modo utilizan los servicios en línea.
+						</p>
+						<h6><u>PARA AYUDARNOS A MEJORAR LOS SERVICIOS EN LÍNEA Y SOLUCIONAR CUALQUIER PROBLEMA</u></h6>
+						<p>
+							Podemos procesar información sobre usted (incluida información básica, contenido de usuario, información de registro y análisis) para poder analizar y mejorar nuestros servicios en línea.
+							Este procesamiento también es necesario para que podamos perseguir nuestros intereses legítimos de (i) asegurar que nuestros Servicios en línea funcionen correctamente para que usted y otros usuarios tengan la mejor experiencia al jugar con cualquiera de nuestros Clientes y usar los otros Servicios en línea; (ii) mejorar la calidad de nuestros Servicios en línea y proporcionar una mejor experiencia a nuestros usuarios; y (iii) identificar y corregir cualquier error en los Clientes y los Servicios en línea.		
+						</p>
+						<h6><u>PARA RESPONDER A SUS CONSULTAS Y SOLICITUDES DE SOPORTE Y PARA PERMITIRLE UTILIZAR LOS FOROS, EL PORTAL DEL DESARROLLADOR Y EL CENTRO DE SOPORTE</u></h6>
+						<p>
+							Podemos procesar la Información de contacto para poder responder adecuadamente a sus consultas y solicitudes de soporte a través del Centro de soporte de acuerdo con los términos de uso acordados entre nosotros.
+						</p>
+						<h6><u>PARA ADQUIRIR NUEVOS USUARIOS E INVOLUCRAR A LOS USUARIOS ACTUALES</u></h6>
+						<p>
+							Podemos procesar la información de la lista de correo para hacerle sugerencias y recomendaciones sobre concursos y servicios que puedan interesarle, para brindarle información sobre otros servicios similares que ofrecemos y para notificarle sobre cambios en nuestros Clientes o los servicios que brindamos.
+							Usamos la información de atribución para comprender qué terceros nos han remitido usuarios.
+							Procesamos esta información para perseguir nuestros intereses legítimos de adquirir nuevos usuarios.
+						</p>
+						<h4 class="fakeit">4. COOKIES</h4>
+						<p>
+							Una cookie es un archivo de texto colocado en su dispositivo cuando accede a nuestros Servicios en línea. Utilizamos cookies y otros dispositivos de seguimiento en línea, como balizas web y almacenamiento de objetos flash para entregar, mejorar y monitorear nuestro sitio web y clientes, incluidas las siguientes formas:</br></br>
+							Autenticación</br>
+							Para iniciar sesión en nuestro sitio web y clientes y mantenerlo conectado.</br></br>
+							Preferencias</br>
+							Para recordar información sobre usted, como su idioma y configuración preferidos.</br></br>
+							Analítica</br>
+							Para ayudarnos a comprender cómo utiliza nuestros Clientes y sitio web, y con qué frecuencia, para que podamos mejorarlos y ofrecer una mejor experiencia a nuestros usuarios. Realizar investigaciones y análisis estadísticos para ayudar a mejorar nuestro contenido, productos y servicios.</br></br>
+							La información que obtenemos de nuestro uso de cookies generalmente no contendrá sus datos personales. Aunque podemos obtener información sobre su dispositivo, como su dirección IP, su navegador y / u otra información de registro de Internet, esto generalmente no lo identificará personalmente.</br>
+							Tenga en cuenta que si elige deshabilitar las cookies o tecnologías similares en su dispositivo, es posible que no pueda hacer un uso completo de nuestros Clientes y nuestro Sitio web.
+						</p>
+						<h4 class="fakeit">5. COMPARTIR DATOS</h4>
+						<h6><u>COMPARTIREMOS SU INFORMACIÓN CON TERCEROS SOLO DE LA MANERA QUE SE DESCRIBE EN ESTA POLÍTICA DE PRIVACIDAD</u></h6>
+						<p>
+							Terceros mencionados en esta Política de privacidad: Divulgaremos datos personales a cualquiera de los terceros mencionados en esta Política de privacidad, para los fines establecidos en esta Política de privacidad.</br>
+							Miembros del grupo, personal, proveedores o subcontratistas: mantenemos la confidencialidad de su información, pero podemos divulgarla a cualquier miembro de nuestro grupo (lo que significa nuestras filiales, nuestra sociedad de cartera final y sus filiales, según se define en la sección 1159 de la Ley de Sociedades de 2006), nuestro personal, proveedores o subcontratistas en la medida en que sea razonablemente necesario para los fines establecidos en esta Política de privacidad. Sin embargo, esto se debe a que no hacen un uso independiente de la información y han acordado protegerla.</br>
+							Fusión o adquisición: si estamos involucrados en una fusión, adquisición o venta de todos o una parte de sus activos, se le notificará a través de un mensaje de cuenta y / o un aviso destacado en nuestro sitio web sobre cualquier cambio en la propiedad o el uso de esta información, así como cualquier opción que pueda tener con respecto a esta información.</br>
+							Requerido por la ley: Además, podemos divulgar su información en la medida en que la ley así lo exija (lo que puede incluir a organismos gubernamentales y agencias de aplicación de la ley); en relación con cualquier procedimiento legal o posibles procedimientos legales; y para establecer, ejercer o defender nuestros derechos legales (incluido el suministro de información a terceros con el fin de prevenir fraudes).</br>
+							Cumplimiento: también podemos divulgar su información personal a terceros para hacer cumplir o aplicar los términos de los acuerdos, para investigar posibles incumplimientos o para proteger los derechos, la propiedad o la seguridad de FAKEIT, nuestros clientes u otros.
+						</p>
+						<h4 class="fakeit">6. SUS DERECHOS EN RELACIÓN CON LOS DATOS PERSONALES QUE PROCESAMOS RELACIONADOS CON USTED</h4>
+						<p>
+							Usted tiene los siguientes derechos sobre la forma en que procesamos los datos personales relacionados con usted, activos en la tabla a continuación. Nuestro objetivo es cumplir sin demoras indebidas, y dentro de un mes a más tardar.</br>
+							Para realizar una solicitud, háganoslo saber enviando un correo electrónico a través del soporte.
+						</p>
+						<h6><u>SOLICITE UNA COPIA DE LOS DATOS QUE ESTAMOS PROCESANDO SOBRE USTED Y CORRIJA LAS IMPRECISIONES.</u></h6>
+						<p>
+							Tiene derecho a solicitar una copia de la información personal que tenemos sobre usted y a corregir cualquier inexactitud.</br>
+							Haremos todos los esfuerzos razonables en la medida requerida por la ley para suministrar, corregir o eliminar la información personal que tengamos sobre usted en nuestros archivos (y con cualquier tercero a quien se le haya revelado).
+						</p>
+						<h6><u>OBJETARNOS EL PROCESAMIENTO DE DATOS SOBRE USTED</u></h6>
+						<p>
+							Puede solicitarnos que restrinjamos, detengamos el procesamiento o que eliminemos sus datos personales si:</br>
+							•	usted dio su consentimiento para que procesemos los datos personales y ha retirado ese consentimiento;</br>
+							•	ya no necesitamos procesar esos datos personales por el motivo por el que se recopilaron;</br>
+							•	estamos procesando esos datos personales porque son de interés público o para perseguir un interés legítimo de FAKEIT o de un tercero, usted no está de acuerdo con ese procesamiento y no existe un interés legítimo primordial para que continuemos procesándolo</br>
+							•	los datos personales fueron procesados ilegalmente;</br>
+							•	necesita que se eliminen los datos personales para cumplir con las obligaciones legales;</br>
+							•	los datos personales se procesan en relación con la oferta de un servicio a un niño.
+						</p>
+						<h6><u>PRESENTAR UNA QUEJA ANTE UNA AUTORIDAD DE SUPERVISIÓN</u></h6>
+						<p>
+							•	Si no está satisfecho con la forma en que procesamos sus datos personales, comuníquese con nosotros a través de los servicios de soporte.</br>
+							•	Si no está de acuerdo con la forma en que procesamos sus datos o respondimos a sus inquietudes, una alternativa es presentar una queja ante una Autoridad de Supervisión de Protección de Datos.
+						</p>
+						<h4 class="fakeit">7. RETENCIÓN DE DATOS</h4>
+						<p>
+							Mantendremos su información personal en nuestros sistemas durante el tiempo que sea necesario para el servicio correspondiente, o según se describa en esta Política de privacidad.
+							El contenido del usuario y la información del foro se retienen indefinidamente. Si desea que eliminemos su cuenta del Foro o cualquier Contenido de usuario que haya publicado, avísenos enviando un correo electrónico mediante el soporte.
+						</p>
+						<h4 class="fakeit">8. NIÑOS</h4>
+						<p>
+							No utilizamos nuestros Servicios en línea para solicitar información o comercializar a sabiendas a niños menores de 13 años. Nuestros términos de uso prohíben que los usuarios menores de 13 años accedan a nuestros Servicios en línea. En caso de que sepamos que hemos recopilado información personal de un niño menor de 13 años, borraremos esa información lo más rápido posible. Si cree que podríamos tener información de un niño menor de 13 años o acerca de él, contáctenos mediante el soporte.
+						</p>
+						<h4 class="fakeit">9. SEGURIDAD</h4>
+						<p>
+							Tomaremos todas las precauciones técnicas y organizativas razonables para evitar el uso indebido o la alteración de su información personal. Por ejemplo, nuestras bases de datos están protegidas con contraseña y se limitan solo a empleados esenciales (como la administración de FAKEIT o empleados cuya función principal requiere acceso al sistema).</br>
+							Tenga en cuenta que, aunque nos esforzamos por proporcionar seguridad razonable para la información que procesamos y mantenemos, ningún sistema de seguridad puede evitar todas las posibles violaciones de seguridad
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		{# Modal #}
+		
+		</br>
+		<div class="row">
+			<div class="col-2 col-sm-4 col-md-4 col-lg-4 col-xl-5"></div>
+			<div class="col-8 col-sm-4 col-md-4 col-lg-4 col-xl-2">
+				<button class="btn btn-primary" id="btnReg">Regístrate</button>{{ form_end(registrationForm) }}
+			</div>
+			<div class="col-2 col-sm-4 col-md-4 col-lg-4 col-xl-5"></div>
+		</div>
+	</div>
+
+{% endblock %}

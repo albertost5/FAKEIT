@@ -1,0 +1,10 @@
+// My variables
+@import "fkvariables";
+@import "fknavbar";
+@import "fkmodal";
+
+// Importar los estilos a cambiar del bootstrap por defecto para que estos prevalezcan.
+@import "bootstrap";
+
+// CSS styles
+@import "fkstyles";

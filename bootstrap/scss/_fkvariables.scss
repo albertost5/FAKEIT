@@ -1,0 +1,22 @@
+
+// LOGIN AND BACKGROUND COLOR
+$fkblack: #0A0C0C;
+$fkgray: #1F1F1F;
+$fkgrayhr: #404040;
+$fkgraylight: #2C2C2C;
+$fkit: #ff5500;
+
+
+
+$colors: (
+  "fkblack": $fkblack,
+  "fkgray": $fkgray,
+  "fkgrayhr": $fkgrayhr,
+  "fkgraylight": $fkgraylight,
+  "fkit": $fkit,
+);
+
+// DIFFERENT PRIMARY COLOR
+$theme-colors: (
+  "primary": #ff5500,
+);

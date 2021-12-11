@@ -1,0 +1,97 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}FAKEIT - Result
+{% endblock %}
+
+
+{# NAVBAR #}
+{% block nav %}
+	{{ include('navbar/mainnavbar.html.twig') }}
+{% endblock %}
+
+
+{% block body %}
+
+<div class="container-fluid pd-t-68" id="splbg">
+    <div class="row no-mlr pd-tb-40">
+        <div class="col-1 col-sm-2 col-md-2 col-lg-2 col-xl-3"></div>
+        <div class="col-10 col-sm-10 col-md-8 col-lg-8 col-xl-6 text-center">
+            <img class="round-img" id="SPLogo" src="/img/SPL.jpg" style="width: 170px; float: left;">
+            <h1 id="SPL" style="padding-left: 250px;">
+                <b>SPANISH PRO LEAGUE ALL STAGE</b>
+                <h1>
+        </div>
+        <div class="col-1 col-sm-2 col-md-2 col-lg-2 col-xl-3"></div>
+    </div>
+</div>
+
+<hr class="w-999">
+
+<div style="padding-top:120px">
+    <div class="row no-mlr">
+        <div class="col-sm-12 col-md-12 col-lg-4 col-xl-4">
+            
+            <div class="card bg-fkgray text-white fk-card mx-auto text-center">
+                <div class="card-body">
+                    <img src="/img/imgUser/{{user.imgUser}}" class="round-img" alt="change" width="150" height="150">
+                    </br>
+                    </br>
+                    <h5 class="card-title">
+                        <img src="/img/flags/{{user.country}}.svg" width="18" height="18" alt="country_{{user.country}}"><b> {{user}}</b>
+                    </h5>
+                    
+                    <p class="card-text mt-10">
+                        Nivel: <img src="/img/levels/level{{user.level}}.svg" width="30" height="50" alt="level_{{user.level}}">
+                        </br> 
+                        Elo: {{user.elo}}  
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-12 col-md-12 col-lg-4 col-xl-4 text-center">
+            
+            <div id="btnready">
+                <div>
+                    <p>{{match.date | date("d/m/Y")}}</p>
+                    {% if match.userkills == 16 %}
+                        <h4><b class="text-success">W</b> - <b class="text-danger">L</b></h4>
+                        <h5><b class="text-success">+25 </b> : <b class="text-danger"> -10</b></h5>
+                    {% else %}
+                        <h4><b class="text-danger">L</b> - <b class="text-success">W</b></h4>
+                        <h5><b class="text-danger">-10</b> : <b class="text-success">+25</b></h5>
+                    {% endif %}
+                    <br/>
+                    <img src="/img/maps/{{map}}.jpg" class="round-img" alt="change" width="120" height="120">
+                    <p>{{map}}</p>
+                    {% if match.userkills == 16 %}
+                        <h5><b class="text-success">{{ match.userkills }}</b> - <b class="text-danger">{{ match.opponentkills }}</b></h5>
+                    {% else %}
+                        <h5><b class="text-danger">{{ match.userkills }}</b> - <b class="text-success">{{ match.opponentkills }}</b></h5>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-sm-12 col-md-12 col-lg-4 col-xl-4">
+            <div class="card bg-fkgray text-white fk-card mx-auto text-center">
+                <div class="card-body">
+                    <img src="/img/imgUser/{{opponent.imgUser}}" class="round-img" alt="change" width="150" height="150">
+                    </br>
+                    </br>
+                    <h5 class="card-title">
+                       <img src="/img/flags/{{opponent.country}}.svg" width="18" height="18" alt="country_{{user.country}}"><b> {{opponent}}</b>  
+                    </h5>
+                    
+                    <p class="card-text mt-10">
+                            Nivel: <img src="/img/levels/level{{opponent.level}}.svg" width="30" height="50" alt="level_{{opponent.level}}">
+                            </br> 
+                            Elo: {{opponent.elo}}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

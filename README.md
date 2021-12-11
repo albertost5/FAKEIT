@@ -1,6 +1,6 @@
 # FAKEIT
 
-Final project of the Web Application Development (01-12-2020).
+First "real project" as completion of the Web Application Development degree (01-12-2020).
 
 Replica of faceit: www.faceit.com
 
